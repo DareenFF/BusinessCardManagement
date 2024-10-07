@@ -1,0 +1,16 @@
+<div class="container">
+    <h1 class="mt-4">Business Card List</h1>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let card of businessCards">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ card.name }}</h5>
+            <p class="card-text">Email: {{ card.email }}</p>
+            <p class="card-text">address: {{ card.address }}</p>
+            <a href="#" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  
