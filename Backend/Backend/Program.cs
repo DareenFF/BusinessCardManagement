@@ -1,6 +1,9 @@
 
+using Backend.Data;
 using BusinessCardManagement.Backend.Interfaces;
 using BusinessCardManagement.Backend.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,12 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();         
 
 builder.Services.AddScoped<IBusinessCardService, BusinessCardService>();
+var configuration = builder.Configuration;
+
+builder.Services.AddDbContext<BusinessCardContext>(options =>
+
+
+options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
