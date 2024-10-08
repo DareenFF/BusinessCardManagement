@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BusinessCard } from '../../Models/BusinessCard';
 import { CommonModule } from '@angular/common';
+import { BusinessCardService } from '../../Services/business-card-service.service';
 
 @Component({
   selector: 'app-business-card-list',
@@ -16,7 +17,17 @@ export class BusinessCardListComponent implements OnInit {
     // Add more business cards as needed
   ];
 
+  //constructor(private service:BusinessCardService){}
+
   ngOnInit() {
     console.log('Business Cards:', this.businessCards); // Ensure this prints the array correctly
   }
+
+
+
+//   Delete(){
+
+// this.service.deleteBusinessCard();
+
+//   }
 }
