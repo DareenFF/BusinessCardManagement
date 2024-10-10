@@ -8,7 +8,7 @@ namespace BusinessCardManagement.Backend.Models
 		public int Id { get; set; }
 		public string? Name { get; set; }
 		public string? Gender { get; set; }
-		 public DateOnly DOB { get; set; }
+		 public DateTime DOB { get; set; }
 		[EmailAddress]
 		public string? Email { get; set; }
 		[Phone]

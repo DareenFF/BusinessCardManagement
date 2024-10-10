@@ -25,6 +25,28 @@
           <small class="text-danger">Address name is required.</small>
         </div>
       </div>
+
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text" id="phone" formControlName="phone" class="form-control" />
+
+        <div>
+          <label>Gender:</label>
+          <div>
+            <input type="radio" id="male" name="gender" value="Male" [(ngModel)]="businessCard.gender" required>
+            <label for="male">Male</label>
+          </div>
+          <div>
+            <input type="radio" id="female" name="gender" value="Female" [(ngModel)]="businessCard.gender" required>
+            <label for="female">Female</label>
+          </div>
+        </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Date of birth</label>
+        <input type="date" id="phone" formControlName="dob" class="form-control" />
+      </div>
+
+      <button class="btn btn-primary" >Upload photo</button>
   
       <button type="submit" class="btn btn-primary" [disabled]="businessCardForm.invalid" (onclick)=onSubmit()>Create Business Card</button>
     </form>

@@ -1,5 +1,6 @@
 ﻿using BusinessCardManagement.Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Backend.Data
 {
@@ -10,6 +11,11 @@ namespace Backend.Data
 		
 
 		public DbSet<BusinessCard> BusinessCards { get; set; }
-
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<BusinessCard>()
+				.Property(p => p.DOB)
+				.HasColumnType("date"); 
+		}
 	}
 }
