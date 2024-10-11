@@ -46,4 +46,30 @@ export class BusinessCardListComponent implements OnInit {
 console.log('deletion successfull');
 
   }
+
+  ExportCardsToXML(){
+
+
+    this.service.exportBusinessCards('XML').subscribe((data: Blob) => {
+      const blob = new Blob([data], { type: 'application/xml' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'BusinessCards.xml';
+      a.click();
+      window.URL.revokeObjectURL(url);
+  });  }
+  ExportCardsToCSV(){
+
+
+    this.service.exportBusinessCards('CSV').subscribe((data: Blob) => {
+      const blob = new Blob([data], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'BusinessCards.csv';
+      a.click();
+      window.URL.revokeObjectURL(url);
+  });
+  }
 }

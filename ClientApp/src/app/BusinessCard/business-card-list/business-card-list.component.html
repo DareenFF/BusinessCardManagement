@@ -1,50 +1,35 @@
-<!-- <div class="container">
-    <h1 class="mt-4">Business Card List</h1>
-    <div class="row">
-      <div *ngIf="businessCards | async as businessCardsList; else noCards">
+<div class="container">
+  <h1 class="mt-4">Business Card List</h1>
+  
+  <button class="btn btn-outline-dark" (click)="ExportCardsToXML()">
+      Export to XML <i class="bi bi-file-arrow-down-fill"></i>
+  </button>
+  
+  <button class="btn btn-outline-success" (click)="ExportCardsToCSV()">
+      Export to CSV <i class="bi bi-file-arrow-down-fill"></i>
+  </button>
 
-      <div class="col-md-4" *ngFor="let card of businessCards">
-        <div class="card mb-4 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">{{ card.name }}</h5>
-            <p class="card-text">Email: {{ card.email }}</p>
-            <p class="card-text">address: {{ card.address }}</p>
-            <a href="#" class="btn btn-primary" onclick="Delete(card)">Delete</a>
-            <a href="#" class="btn btn-primary">Export</a>
-
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
-  </div> 
-   -->
-
-   <div class="container">
-    <h1 class="mt-4">Business Card List</h1>
-    <div class="row">
+  <div class="row">
       <!-- Use async pipe to unwrap the observable -->
       <div *ngIf="businessCards | async as businessCardsList; else noCards">
-        <div class="col-md-4" *ngFor="let card of businessCardsList">
-          <div class="card mb-4 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">{{ card.name }}</h5>
-              <p class="card-text">Id: {{ card.id }}</p>
-
-              <p class="card-text">Email: {{ card.email }}</p>
-              <p class="card-text">Address: {{ card.address }}</p>
-              <!-- Use Angular's (click) binding instead of onclick -->
-              <button class="btn btn-primary" (click)="OnDelete(card.id!)">Delete</button>
-              <a href="#" class="btn btn-primary">Export</a>
-            </div>
+          <div class="col-md-4" *ngFor="let card of businessCardsList">
+              <div class="card mb-4 shadow-sm">
+                  <div class="card-body">
+                      <h5 class="card-title">{{ card.name }}</h5>
+                      <p class="card-text">Id: {{ card.id }}</p>
+                      <p class="card-text">Email: {{ card.email }}</p>
+                      <p class="card-text">Address: {{ card.address }}</p>
+                      <!-- Use Angular's (click) binding instead of onclick -->
+                      <button class="btn btn-danger btn-sm" (click)="OnDelete(card.id!)">Delete</button>
+                      <a href="#" class="btn btn-primary btn-sm">Export</a>
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
-    </div>
   </div>
-  
+
   <!-- No business cards found -->
   <ng-template #noCards>
-    <p>No business cards found.</p>
+      <p>No business cards found.</p>
   </ng-template>
-  
+</div>

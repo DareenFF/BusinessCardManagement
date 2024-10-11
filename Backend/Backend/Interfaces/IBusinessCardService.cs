@@ -1,4 +1,5 @@
 ﻿using BusinessCardManagement.Backend.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BusinessCardManagement.Backend.Interfaces
 {
@@ -8,6 +9,13 @@ namespace BusinessCardManagement.Backend.Interfaces
 		 List<BusinessCard> GetBusinessCards();
 		 void CreateBusinessCard(BusinessCard businessCard);
 		 void DeleteBusinessCard(int id);
-		 void ExportBusinessCards();
+		FileStreamResult ExportBusinessCardsToXML();
+		byte[] ExportBusinessCardsToCSV();
+
+		void ParseXML();
+
+		void ParseCSV();
+
+		BusinessCard GetBusinessCardByName(string name);
 	}
 }

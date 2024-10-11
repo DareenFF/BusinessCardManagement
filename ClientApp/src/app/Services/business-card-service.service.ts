@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { BusinessCard } from '../Models/BusinessCard';
 import { environment } from '../../environments/environment';
 
@@ -20,11 +20,22 @@ export class BusinessCardService {
   );  }
 
   createBusinessCard(businessCard: BusinessCard): Observable<BusinessCard> {
-    return this.http.post<BusinessCard>(environment.apiUrl, businessCard);
-  }
+
+    console.log('url:' + environment.apiUrl);
+
+    return this.http.post<BusinessCard>(environment.apiUrl, businessCard).pipe(
+      catchError((error: any) => {
+        console.error('Error:', error);
+        return throwError(error);
+      })
+    );  }
 
 
   deleteBusinessCard(id: number): Observable<void> {
     return this.http.delete<void>(`${environment.apiUrl}${id}`);
+  }
+
+  exportBusinessCards(format:string){
+    return this.http.get(`${environment.apiUrl}ExportCards?format=${format}`, { responseType: 'blob' });
   }
 }

@@ -1,58 +1,57 @@
-<div class="container mt-4">
-    <h1>Create Business Card</h1>
-    <form [formGroup]="businessCardForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" id="name" formControlName="name" class="form-control" />
-        <div *ngIf="businessCardForm.get('name')?.invalid && (businessCardForm.get('name')?.touched || businessCardForm.get('name')?.dirty)">
-          <small class="text-danger">Name is required.</small>
-        </div>
+
+ <div class="container mt-4">
+  <h1>Create Business Card</h1>
+  <form [formGroup]="businessCardForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" id="name" formControlName="name" class="form-control" />
+      <div *ngIf="businessCardForm.get('name')?.invalid && (businessCardForm.get('name')?.touched || businessCardForm.get('name')?.dirty)">
+        <small class="text-danger">Name is required.</small>
       </div>
-  
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" id="email" formControlName="email" class="form-control" />
-        <div *ngIf="businessCardForm.get('email')?.invalid && (businessCardForm.get('email')?.touched || businessCardForm.get('email')?.dirty)">
-          <small class="text-danger">A valid email is required.</small>
-        </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" formControlName="email" class="form-control" />
+      <div *ngIf="businessCardForm.get('email')?.invalid && (businessCardForm.get('email')?.touched || businessCardForm.get('email')?.dirty)">
+        <small class="text-danger">A valid email is required.</small>
       </div>
+    </div>
 
-  
-      <div class="mb-3">
-        <label for="company" class="form-label">Address</label>
-        <input type="text" id="company" formControlName="address" class="form-control" />
-        <div *ngIf="businessCardForm.get('company')?.invalid && (businessCardForm.get('company')?.touched || businessCardForm.get('company')?.dirty)">
-          <small class="text-danger">Address name is required.</small>
-        </div>
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <input type="text" id="address" formControlName="address" class="form-control" />
+      <div *ngIf="businessCardForm.get('address')?.invalid && (businessCardForm.get('address')?.touched || businessCardForm.get('address')?.dirty)">
+        <small class="text-danger">Address name is required.</small>
       </div>
+    </div>
 
-      <div class="mb-3">
-        <label for="phone" class="form-label">Phone</label>
-        <input type="text" id="phone" formControlName="phone" class="form-control" />
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone</label>
+      <input type="text" id="phone" formControlName="phone" class="form-control" />
+    </div>
 
-        <div>
-          <label>Gender:</label>
-          <div>
-            <input type="radio" id="male" name="gender" value="Male" [(ngModel)]="businessCard.gender" required>
-            <label for="male">Male</label>
-          </div>
-          <div>
-            <input type="radio" id="female" name="gender" value="Female" [(ngModel)]="businessCard.gender" required>
-            <label for="female">Female</label>
-          </div>
-        </div>
-      <div class="mb-3">
-        <label for="phone" class="form-label">Date of birth</label>
-        <input type="date" id="phone" formControlName="dob" class="form-control" />
+    <div class="mb-3">
+      <label>Gender:</label>
+      <div>
+        <input type="radio" id="male" formControlName="gender" value="Male">
+        <label for="male">Male</label>
       </div>
+      <div>
+        <input type="radio" id="female" formControlName="gender" value="Female">
+        <label for="female">Female</label>
+      </div>
+    </div>
 
-      <button class="btn btn-primary" >Upload photo</button>
+    <div class="mb-3">
+      <label for="dob" class="form-label">Date of Birth</label>
+      <input type="date" id="dob" formControlName="dob" class="form-control" />
+    </div>
+
+    <button class="btn btn-primary" style="margin: 5px;">Upload Photo</button>
+    <button (click)="UploadFile()" class="btn btn-success" >Upload XML</button>
+
   
-      <button type="submit" class="btn btn-primary" [disabled]="businessCardForm.invalid" (onclick)=onSubmit()>Create Business Card</button>
-    </form>
-  </div>
-  
-
-
-
-
+    <button type="submit" class="btn btn-primary" [disabled]="businessCardForm.invalid">Create Business Card</button>
+  </form>
+</div>

@@ -1,6 +1,7 @@
 ﻿using BusinessCardManagement.Backend.Interfaces;
 using BusinessCardManagement.Backend.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BusinessCardManagement.Backend.Controllers
 {
@@ -13,7 +14,7 @@ namespace BusinessCardManagement.Backend.Controllers
 		public BusinessCardController(IBusinessCardService service) {
 
 			businessCardService = service;
-		
+
 		}
 
 		[HttpGet("get")]
@@ -26,11 +27,29 @@ namespace BusinessCardManagement.Backend.Controllers
 			return Ok(list);
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> ExportBusinessCards(int id)
+		[HttpGet("ExportCards")]
+		public async Task<IActionResult> ExportBusinessCards(string format)
 		{
-			return Ok();
-			//export all business cards
+
+			if (format == "XML")
+			{
+				var result = businessCardService.ExportBusinessCardsToXML();
+				return result;
+			}
+			else if (format == "CSV")
+			{
+				byte[] csvBytes = businessCardService.ExportBusinessCardsToCSV();
+
+				if (csvBytes != null)
+				{
+					var stream = new MemoryStream(csvBytes);
+					return File(stream, "text/csv", "BusinessCards.csv");
+				}
+
+			}
+
+			return null;
+
 		}
 
 		[HttpPost]
@@ -38,7 +57,7 @@ namespace BusinessCardManagement.Backend.Controllers
 		{
 
 
-			if(businessCard != null) {
+			if (businessCard != null) {
 
 				try
 				{
@@ -50,20 +69,20 @@ namespace BusinessCardManagement.Backend.Controllers
 				{
 
 					throw;
-				}			
+				}
 			}
 			//create a new business card
 			return Ok();
 		}
 
-		
+
 
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> BusinessCard(int id)
 		{
 			//delete specific business card
 
-			if(id != 0)
+			if (id != 0)
 			{
 				try
 				{
@@ -82,5 +101,21 @@ namespace BusinessCardManagement.Backend.Controllers
 			return Ok();
 
 		}
+
+		[HttpGet("FilterByName")]
+
+		public async Task <IActionResult> FilterByName([FromQuery] string name) { 
+		
+			if(!name.IsNullOrEmpty()) {
+			
+			var businessCard=businessCardService.GetBusinessCardByName(name);
+
+
+				return Ok(businessCard);
+			}
+			return Ok();
+
+		}
+
 	}
 }
