@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BusinessCardService } from '../../Services/business-card-service.service';
 
 import { Observable } from 'rxjs';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-business-card-list',
@@ -15,6 +16,7 @@ import { Observable } from 'rxjs';
 })
 export class BusinessCardListComponent implements OnInit {
   businessCards!: Observable<BusinessCard[]>; // Use BusinessCard type
+  filteredCards!:Observable<BusinessCard[]>;
 
 
   constructor(private service:BusinessCardService){
@@ -37,7 +39,7 @@ export class BusinessCardListComponent implements OnInit {
 
     this.service.deleteBusinessCard(id).subscribe(() => {
       console.log('Business card deleted successfully');
-      this.ngOnInit(); // Refresh the list after deletion
+      this.ngOnInit(); 
     }, error => {
       console.error('Error deleting business card:', error);
     });
@@ -71,5 +73,16 @@ console.log('deletion successfull');
       a.click();
       window.URL.revokeObjectURL(url);
   });
+  }
+
+  SearchByAddress(address:string){
+
+
+    if (address.trim() === '') {
+      this.filteredCards = this.businessCards;
+    } else {
+      this.filteredCards = this.service.getBusinessCardsByAddress(address);
+    }
+   this.filteredCards.subscribe(cards => console.log('Business Cards:', cards));
   }
 }

@@ -38,4 +38,14 @@ export class BusinessCardService {
   exportBusinessCards(format:string){
     return this.http.get(`${environment.apiUrl}ExportCards?format=${format}`, { responseType: 'blob' });
   }
+
+  getBusinessCardsByAddress(address:string): Observable<BusinessCard[]> {
+    console.log(`Calling API: ${environment.apiUrl}FilterByAddress?address=${address}`); // Verify correct URL
+
+    return this.http.get<BusinessCard[]>(`${environment.apiUrl}FilterByAddress?address=${address}`).pipe(
+      catchError(error => {
+          console.error('Error fetching business cards', error);
+          return of([]); 
+      })
+  );  }
 }

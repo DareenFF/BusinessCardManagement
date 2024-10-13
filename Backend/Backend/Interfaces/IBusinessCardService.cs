@@ -16,6 +16,6 @@ namespace BusinessCardManagement.Backend.Interfaces
 
 		void ParseCSV();
 
-		BusinessCard GetBusinessCardByName(string name);
+		List<BusinessCard> GetBusinessCardByAddress(string address);
 	}
 }

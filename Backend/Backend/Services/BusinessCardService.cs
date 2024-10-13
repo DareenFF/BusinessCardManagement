@@ -53,22 +53,22 @@ namespace BusinessCardManagement.Backend.Services
 		}
 		public byte[] ExportBusinessCardsToCSV()
 		{
-			List<BusinessCard> list = GetBusinessCards(); // Your logic to get business cards
+			List<BusinessCard> list = GetBusinessCards(); 
 
 			if (list != null && list.Count > 0)
 			{
 				var csv = new StringBuilder();
-				csv.AppendLine("Id,Name,Email,Address"); // Add headers
+				csv.AppendLine("Id,Name,Email,Address"); 
 
 				foreach (var card in list)
 				{
-					csv.AppendLine($"{card.Id},{card.Name},{card.Email},{card.Address}"); // Adjust properties as needed
+					csv.AppendLine($"{card.Id},{card.Name},{card.Email},{card.Address}"); 
 				}
 
-				return Encoding.UTF8.GetBytes(csv.ToString()); // Return as byte array
+				return Encoding.UTF8.GetBytes(csv.ToString()); 
 			}
 
-			return null; // Handle the case where the list is null or empty
+			return null; 
 		}
 
 
@@ -77,12 +77,13 @@ namespace BusinessCardManagement.Backend.Services
 			return _context.BusinessCards.ToList();
 		}
 
-		public BusinessCard GetBusinessCardByName(string name) {
+		public List<BusinessCard> GetBusinessCardByAddress(string address) {
 
 
-			var businessCard = _context.BusinessCards.Where(x=>x.Name==name.Trim().ToUpper()).FirstOrDefault();
+			List<BusinessCard> list=_context.BusinessCards.Where(x=>x.Address.Contains(address)).ToList();
 
-			return businessCard;
+
+			return list;
 
 
 		}

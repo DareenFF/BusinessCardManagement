@@ -102,16 +102,16 @@ namespace BusinessCardManagement.Backend.Controllers
 
 		}
 
-		[HttpGet("FilterByName")]
+		[HttpGet("FilterByAddress")]
 
-		public async Task <IActionResult> FilterByName([FromQuery] string name) { 
+		public async Task <IActionResult> FilterByAddress(string address) { 
 		
-			if(!name.IsNullOrEmpty()) {
+			if(!address.IsNullOrEmpty()) {
 			
-			var businessCard=businessCardService.GetBusinessCardByName(name);
+			var businessCards=businessCardService.GetBusinessCardByAddress(address);
 
 
-				return Ok(businessCard);
+				return Ok(businessCards);
 			}
 			return Ok();
 
