@@ -2,17 +2,18 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog,MatDialogModule  } from '@angular/material/dialog';
 import { PreviewBusinessCardComponent } from '../preview-business-card/preview-business-card.component';
 import { BusinessCardService } from '../../Services/business-card-service.service';
 import { BusinessCard } from '../../Models/BusinessCard';
-import { debounce } from 'rxjs';
+
+
 
 
 @Component({
   selector: 'app-create-business-card',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterOutlet],
+  imports: [CommonModule, ReactiveFormsModule, RouterOutlet,MatDialogModule ],
   templateUrl: './create-business-card.component.html',
   styleUrls: ['./create-business-card.component.css']
 })
@@ -58,44 +59,29 @@ export class CreateBusinessCardComponent {
     }
 }
 
+OpenPreviewPage(): void {
+  if (this.businessCardForm.valid) {
+    const dialogRef = this.dialog.open(PreviewBusinessCardComponent, {
+      width: '400px',
+      height:'600px',
+      data: this.businessCardForm.value,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.onSubmit();
+      }
+    });
+  }
+}
+
 UploadFile(){
 
 
   
 }
 
-    // console.log(this.businessCard);
-    // this.businessCard = this.businessCardForm.value;
 
-    // if(this.businessCardForm.valid){
-    //   this.service.createBusinessCard(this.businessCard);
-
-    // }
-    
-    //.subscribe(response => {
-    //   console.log('Business card created successfully:', response);
-    
-    //   // Open the preview dialog after successful creation
-    //   const dialogRef = this.dialog.open(PreviewBusinessCardComponent, {
-    //     width: '400px',
-    //     height: '400px',
-    //     disableClose: true,
-    //     panelClass: 'custom-dialog'
-    //   });
-
-    //   dialogRef.afterClosed().subscribe(result => {
-    //     if (result) {
-    //       console.log('Confirmed!');
-    //       this.router.navigate(['/some-route']); // Replace with your desired route after confirmation
-    //     } else {
-    //       console.log('Cancelled!');
-    //     }
-    //   });
-
-    // }, error => {
-    //   console.error('Error creating business card:', error);
-    //   // Handle error here
-    // });
   
 }
 

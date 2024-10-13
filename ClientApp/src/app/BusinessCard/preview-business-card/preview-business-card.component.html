@@ -1,1 +1,13 @@
-<p>testfffffffffdfdfffffffing</p>
+<h2 mat-dialog-title>Confirm Business Card</h2>
+<div mat-dialog-content>
+  <p><strong>Name:</strong> {{ data.name }}</p>
+  <p><strong>Email:</strong> {{ data.email }}</p>
+  <p><strong>Address:</strong> {{ data.address }}</p>
+  <p><strong>Phone:</strong> {{ data.phone }}</p>
+  <p><strong>Gender:</strong> {{ data.gender }}</p>
+  <p><strong>Date of Birth:</strong> {{ data.dob | date }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" (click)="onConfirm()">Confirm</button>
+</div>

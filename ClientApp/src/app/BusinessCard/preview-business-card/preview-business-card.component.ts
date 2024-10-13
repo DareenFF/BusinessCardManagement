@@ -1,25 +1,30 @@
-import { Component } from '@angular/core';
-import { MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogModule,MatDialogActions, MatDialogContent, MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+
+
 
 
 @Component({
   selector: 'app-preview-business-card',
   standalone: true,
-  imports: [MatDialogActions,MatDialogContent],
+  imports: [MatDialogActions,MatDialogContent,CommonModule,MatDialogModule],
   templateUrl: './preview-business-card.component.html',
-  styleUrl: './preview-business-card.component.css'
+  styleUrl: './preview-business-card.component.css',
+  providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }], // Provide MAT_DIALOG_DATA
+
 })
 export class PreviewBusinessCardComponent {
 
-constructor(public dialogRef: MatDialogRef<PreviewBusinessCardComponent>){
-
-
-}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<PreviewBusinessCardComponent>
+  ) {}
 onConfirm(): void {
-    this.dialogRef.close(true); // Return true on confirmation
+    this.dialogRef.close(true); 
   }
 
   onCancel(): void {
-    this.dialogRef.close(false); // Return false on cancellation
+    this.dialogRef.close(false); 
   }
 }

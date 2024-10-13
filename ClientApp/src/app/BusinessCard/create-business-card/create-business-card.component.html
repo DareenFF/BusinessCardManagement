@@ -1,7 +1,7 @@
 
  <div class="container mt-4">
   <h1>Create Business Card</h1>
-  <form [formGroup]="businessCardForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="businessCardForm" (ngSubmit)="OpenPreviewPage()">
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
       <input type="text" id="name" formControlName="name" class="form-control" />
@@ -54,4 +54,5 @@
   
     <button type="submit" class="btn btn-primary" [disabled]="businessCardForm.invalid">Create Business Card</button>
   </form>
-</div>
+</div> 
+

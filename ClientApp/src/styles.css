@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+.mat-dialog-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto; /* Prevent container height issues */
+    margin: 0 auto; /* Center horizontally */
+    position: fixed; /* Ensure it floats over content */
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); /* Center the dialog */
+  }
