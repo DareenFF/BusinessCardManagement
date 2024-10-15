@@ -21,7 +21,7 @@
 
 1. Clone the repository:
    
-   ```git clone https://github.com/fretto/BusinessCardManagement.git```
+   ```git clone https://github.com/DareenFF/BusinessCardManagement.git```
    
 3. Navigate to Backend project
 
