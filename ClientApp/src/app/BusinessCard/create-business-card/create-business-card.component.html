@@ -1,5 +1,4 @@
-
- <div class="container mt-4">
+<div class="container mt-4">
   <h1>Create Business Card</h1>
   <form [formGroup]="businessCardForm" (ngSubmit)="OpenPreviewPage()">
     <div class="mb-3">
@@ -22,7 +21,7 @@
       <label for="address" class="form-label">Address</label>
       <input type="text" id="address" formControlName="address" class="form-control" />
       <div *ngIf="businessCardForm.get('address')?.invalid && (businessCardForm.get('address')?.touched || businessCardForm.get('address')?.dirty)">
-        <small class="text-danger">Address name is required.</small>
+        <small class="text-danger">Address is required.</small>
       </div>
     </div>
 
@@ -34,11 +33,11 @@
     <div class="mb-3">
       <label>Gender:</label>
       <div>
-        <input type="radio" id="male" formControlName="gender" value="Male">
+        <input type="radio" id="male" formControlName="gender" value="Male" />
         <label for="male">Male</label>
       </div>
       <div>
-        <input type="radio" id="female" formControlName="gender" value="Female">
+        <input type="radio" id="female" formControlName="gender" value="Female" />
         <label for="female">Female</label>
       </div>
     </div>
@@ -48,11 +47,14 @@
       <input type="date" id="dob" formControlName="dob" class="form-control" />
     </div>
 
-    <button class="btn btn-primary" style="margin: 5px;">Upload Photo</button>
-    <button (click)="UploadFile()" class="btn btn-success" >Upload XML</button>
+    <div class="mb-3">
+      <label for="fileUpload" class="form-label">Upload File (CSV or XML)</label>
+      <input type="file" id="fileUpload" (change)="UploadFile($event)" accept=".csv,.xml" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!selectedFile" (click)="onSubmit()">Upload file</button>
 
-  
+
     <button type="submit" class="btn btn-primary" [disabled]="businessCardForm.invalid">Create Business Card</button>
-  </form>
-</div> 
 
+</form>
+</div>

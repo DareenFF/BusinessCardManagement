@@ -1,5 +1,6 @@
 
 using Backend.Data;
+using Backend.Repositories;
 using BusinessCardManagement.Backend.Interfaces;
 using BusinessCardManagement.Backend.Services;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,8 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();         
 
 builder.Services.AddScoped<IBusinessCardService, BusinessCardService>();
+
+builder.Services.AddScoped<IBusinessCardRepository, BusinessCardRepository>();
 var configuration = builder.Configuration;
 
 builder.Services.AddDbContext<BusinessCardContext>(options =>

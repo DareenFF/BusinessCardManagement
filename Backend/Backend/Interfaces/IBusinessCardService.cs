@@ -12,9 +12,9 @@ namespace BusinessCardManagement.Backend.Interfaces
 		FileStreamResult ExportBusinessCardsToXML();
 		byte[] ExportBusinessCardsToCSV();
 
-		void ParseXML();
+		BusinessCard ParseXML(IFormFile file);
 
-		void ParseCSV();
+		BusinessCard ParseCSV(IFormFile file);
 
 		List<BusinessCard> GetBusinessCardByAddress(string address);
 	}

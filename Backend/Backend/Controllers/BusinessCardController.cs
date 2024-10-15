@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace BusinessCardManagement.Backend.Controllers
 {
-	//testing commit
 	[ApiController]
 	[Route("api/[controller]")]
 	public class BusinessCardController : ControllerBase
@@ -55,32 +54,67 @@ namespace BusinessCardManagement.Backend.Controllers
 		[HttpPost]
 		public async Task<IActionResult> BusinessCard([FromBody] BusinessCard businessCard)
 		{
+		
+				if (businessCard == null)
+				{
+					return BadRequest("Business card data is required.");
+				}
 
-
-			if (businessCard != null) {
+				if (!ModelState.IsValid)
+				{
+					return BadRequest(ModelState);
+				}
 
 				try
 				{
 					businessCardService.CreateBusinessCard(businessCard);
-					return Ok(201);
 
+					return CreatedAtAction(nameof(BusinessCard), new { id = businessCard.Id }, businessCard);
 				}
-				catch (Exception)
+				catch (Exception ex)
 				{
-
-					throw;
+					return StatusCode(500, "An error occurred while processing your request.");
 				}
-			}
-			//create a new business card
-			return Ok();
+							
+			
 		}
 
+		[HttpPost("UploadFile")]
+		public async Task<IActionResult> BusinessCard([FromForm] IFormFile file)
+		{
+			if (file == null)
+			{
+				return BadRequest("No file was uploaded.");
+			}
+
+			BusinessCard extractedCard = null;
+
+			if (file.FileName.EndsWith(".csv"))
+			{
+				extractedCard = businessCardService.ParseCSV(file);
+			}
+			else if (file.FileName.EndsWith(".xml"))
+			{
+				extractedCard = businessCardService.ParseXML(file);
+			}
+			else
+			{
+				return BadRequest("Unsupported file type. Please upload a CSV or XML file.");
+			}
+
+			if (extractedCard == null)
+			{
+				return BadRequest("Failed to parse the file or it contains invalid data.");
+			}
+
+			businessCardService.CreateBusinessCard(extractedCard);
+			return CreatedAtAction(nameof(BusinessCard), new { id = extractedCard.Id }, extractedCard);
+		}
 
 
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> BusinessCard(int id)
 		{
-			//delete specific business card
 
 			if (id != 0)
 			{

@@ -30,6 +30,15 @@ export class BusinessCardService {
       })
     );  }
 
+    createBusinessCardByFileUpload(file:File):Observable<any>{
+
+      const formData = new FormData();
+      formData.append('file', file); // The name should match the parameter in your endpoint
+  
+      return this.http.post(`${environment.apiUrl}UploadFile`, formData); // Update this with your file upload endpoint
+    }
+    
+
 
   deleteBusinessCard(id: number): Observable<void> {
     return this.http.delete<void>(`${environment.apiUrl}${id}`);

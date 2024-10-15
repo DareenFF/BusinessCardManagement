@@ -1,7 +1,11 @@
 ﻿using Backend.Data;
+using Backend.Repositories;
 using BusinessCardManagement.Backend.Interfaces;
 using BusinessCardManagement.Backend.Models;
+using CsvHelper;
+using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -11,25 +15,23 @@ namespace BusinessCardManagement.Backend.Services
 	public class BusinessCardService : IBusinessCardService
 	{
 		private readonly BusinessCardContext _context;
-		public BusinessCardService(BusinessCardContext context) {
+
+		private readonly IBusinessCardRepository _repository;
+
+		public BusinessCardService(BusinessCardContext context, IBusinessCardRepository repository) {
 		_context = context;
-		}	
+			_repository = repository;
+
+		}
 		public void CreateBusinessCard(BusinessCard businessCard)
 		{
 			
-			_context.BusinessCards.Add(businessCard);
-			_context.SaveChanges();
+			_repository.Add(businessCard);
 		}
 
 		public void DeleteBusinessCard(int id)
 		{
-			var businessCard = _context.BusinessCards.Where(x => x.Id==id).FirstOrDefault();
-			if(businessCard != null)
-			{
-				_context.BusinessCards.Remove(businessCard);
-				_context.SaveChanges();
-
-			}
+			_repository.DeleteById(id);			
 		}
 
 		public FileStreamResult ExportBusinessCardsToXML()
@@ -74,27 +76,51 @@ namespace BusinessCardManagement.Backend.Services
 
 		public List<BusinessCard> GetBusinessCards()
 		{
-			return _context.BusinessCards.ToList();
+			return _repository.GetAll();
 		}
 
 		public List<BusinessCard> GetBusinessCardByAddress(string address) {
 
 
-			List<BusinessCard> list=_context.BusinessCards.Where(x=>x.Address.Contains(address)).ToList();
-
-
-			return list;
+			return _repository.GetByAddress(address);
 
 
 		}
 
-		public void ParseXML()
+		public BusinessCard? ParseXML(IFormFile file)
 		{
+			using var stream = file.OpenReadStream(); 
+			var serializer = new XmlSerializer(typeof(BusinessCard)); 
 
+			return (BusinessCard?)serializer.Deserialize(stream);
 		}
-		public void ParseCSV()
+		public BusinessCard ParseCSV(IFormFile file)
 		{
+			using var reader = new StreamReader(file.OpenReadStream());
+			using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 
+			csv.Context.RegisterClassMap<BusinessCardMap>();
+
+
+			try
+			{
+				csv.Read();
+				csv.ReadHeader(); 
+
+				if (csv.Read())
+				{
+					return csv.GetRecord<BusinessCard>();
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error parsing CSV: {ex.Message}");
+			}
+
+			return null; 
 		}
+
+
 	}
 }
+
