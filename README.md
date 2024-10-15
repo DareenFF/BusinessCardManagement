@@ -35,13 +35,13 @@
    ```dotnet build```
 6. run
    
-   ```dotnet run```
+   ```dotnet run``` (port=7205)
 
    run the client app:
 1. Navigate to client app directory ```cd ClientApp```
 2. Install node packages ```npm install```
 3. build the project ``` ng build ```
-4. run the project ```ng serve```
+4. run the project ```ng serve``` (port=4200)
 
 
 ## Database configuration :
