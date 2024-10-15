@@ -10,10 +10,21 @@
     </button>
     
     <br>
-    <div>
-        <input type="text" #searchInput placeholder="Search by address" (keydown.enter)="SearchByAddress(searchInput.value)" class="form-control" style="width: 20%;" />
-        <button class="btn btn-primary" (click)="SearchByAddress(searchInput.value)"><i class="bi bi-search"></i></button>
-    </div>
+    <div style="display: flex; align-items: center; gap: 10px; padding-block: 10px;">
+        <input 
+          type="text" 
+          #searchInput 
+          placeholder="Search by address" 
+          (keydown.enter)="SearchByAddress(searchInput.value)" 
+          class="form-control" 
+          style="width: 20%;" 
+        />
+        <button 
+          class="btn btn-primary" 
+          (click)="SearchByAddress(searchInput.value)">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
   
     <div class="row mt-4">
         <ng-container *ngIf="filteredCards | async as filteredCardsList; else showAllCards">
@@ -23,6 +34,8 @@
                         <h5 class="card-title">{{ card.name }}</h5>
                         <p class="card-text">Id: {{ card.id }}</p>
                         <p class="card-text">Email: {{ card.email }}</p>
+                        <p class="card-text">Phone: {{ card.phone }}</p>
+                        <p class="card-text">Gender: {{ card.gender }}</p>
                         <p class="card-text">Address: {{ card.address }}</p>
                         <button class="btn btn-danger btn-sm" (click)="OnDelete(card.id!)">Delete</button>
                         <a href="#" class="btn btn-primary btn-sm">Export</a>
@@ -39,6 +52,8 @@
                             <h5 class="card-title">{{ card.name }}</h5>
                             <p class="card-text">Id: {{ card.id }}</p>
                             <p class="card-text">Email: {{ card.email }}</p>
+                            <p class="card-text">Phone: {{ card.phone }}</p>
+                            <p class="card-text">Gender: {{ card.gender }}</p>
                             <p class="card-text">Address: {{ card.address }}</p>
                             <button class="btn btn-danger btn-sm" (click)="OnDelete(card.id!)">Delete</button>
                             <a href="#" class="btn btn-primary btn-sm">Export</a>

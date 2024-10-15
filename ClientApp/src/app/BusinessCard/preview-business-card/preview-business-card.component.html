@@ -8,6 +8,6 @@
   <p><strong>Date of Birth:</strong> {{ data.dob | date }}</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button color="primary" (click)="onConfirm()">Confirm</button>
+  <button mat-button (click)="onCancel()" class="btn btn-danger">Cancel</button>
+  <button mat-button color="primary" (click)="onConfirm()" class="btn btn-success">Confirm</button>
 </div>

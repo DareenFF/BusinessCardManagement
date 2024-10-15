@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   imports: [MatDialogActions,MatDialogContent,CommonModule,MatDialogModule],
   templateUrl: './preview-business-card.component.html',
   styleUrl: './preview-business-card.component.css',
-  providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }], // Provide MAT_DIALOG_DATA
+  providers: [], 
 
 })
 export class PreviewBusinessCardComponent {
@@ -19,7 +19,8 @@ export class PreviewBusinessCardComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<PreviewBusinessCardComponent>
-  ) {}
+    
+  ) {console.log(data);}
 onConfirm(): void {
     this.dialogRef.close(true); 
   }

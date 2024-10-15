@@ -81,7 +81,7 @@ OpenPreviewPage(): void {
   if (this.businessCardForm.valid) {
     const dialogRef = this.dialog.open(PreviewBusinessCardComponent, {
       width: '400px',
-      height:'600px',
+      height:'500px',
       data: this.businessCardForm.value,
     });
 

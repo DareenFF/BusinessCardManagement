@@ -14,12 +14,12 @@ namespace BusinessCardManagement.Backend.Services
 {
 	public class BusinessCardService : IBusinessCardService
 	{
-		private readonly BusinessCardContext _context;
+		//private readonly BusinessCardContext _context;
 
 		private readonly IBusinessCardRepository _repository;
 
-		public BusinessCardService(BusinessCardContext context, IBusinessCardRepository repository) {
-		_context = context;
+		public BusinessCardService( IBusinessCardRepository repository) {
+		//_context = context;
 			_repository = repository;
 
 		}
