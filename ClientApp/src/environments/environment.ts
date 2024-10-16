@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    apiUrl: 'https://localhost:7205/api/BusinessCard/',
+    apiUrl: 'https://localhost:7205/api/BusinessCards/',
   };
   

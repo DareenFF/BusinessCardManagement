@@ -11,21 +11,27 @@ namespace BusinessCardManagement.Backend.Models
 		[XmlElement("Id")] 
 		public int Id { get; set; }
 
-		[XmlElement("Name")] 
+		[XmlElement("Name")]
+		[Required]
 		public string? Name { get; set; }
 
-		[XmlElement("Gender")] 
+		[XmlElement("Gender")]
+		[Required]
 		public string? Gender { get; set; }
 
+		[Required]
 		[XmlElement("DOB")] 
 		public DateTime DOB { get; set; }
 
+		[Required]
 		[XmlElement("Email")] 
 		public string? Email{ get; set; }
 
+		[Required]
 		[XmlElement("Phone")] 
 		public string? Phone { get; set; }
 
+		[Required]
 		[XmlElement("Address")] 
 		public string? Address { get; set; }
 

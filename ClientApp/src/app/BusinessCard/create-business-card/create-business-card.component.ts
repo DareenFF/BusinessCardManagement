@@ -37,8 +37,8 @@ export class CreateBusinessCardComponent {
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
       gender: ['', Validators.required] ,
-      phone:[''],
-      dob:['']
+      phone:['',Validators.required],
+      dob:['',Validators.required]
     });
   }
 

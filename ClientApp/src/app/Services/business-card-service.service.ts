@@ -12,7 +12,7 @@ export class BusinessCardService {
   constructor(private http: HttpClient) { }
 
   getBusinessCards(): Observable<BusinessCard[]> {
-    return this.http.get<BusinessCard[]>(`${environment.apiUrl}get`).pipe(
+    return this.http.get<BusinessCard[]>(`${environment.apiUrl}`).pipe(
       catchError(error => {
           console.error('Error fetching business cards', error);
           return of([]); 

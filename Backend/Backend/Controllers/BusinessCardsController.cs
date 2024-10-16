@@ -7,19 +7,18 @@ namespace BusinessCardManagement.Backend.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
-	public class BusinessCardController : ControllerBase
+	public class BusinessCardsController : ControllerBase
 	{
 		private readonly IBusinessCardService businessCardService;
-		public BusinessCardController(IBusinessCardService service) {
+		public BusinessCardsController(IBusinessCardService service) {
 
 			businessCardService = service;
 
 		}
 
-		[HttpGet("get")]
+		[HttpGet]
 		public async Task<IActionResult> BusinessCards()
 		{
-			//return all business cards
 
 			List<BusinessCard> list = businessCardService.GetBusinessCards();
 
@@ -99,12 +98,12 @@ namespace BusinessCardManagement.Backend.Controllers
 			}
 			else
 			{
-				return BadRequest("Unsupported file type. Please upload a CSV or XML file.");
+				return BadRequest("Only accepts CSV or XML files");
 			}
 
 			if (extractedCard == null)
 			{
-				return BadRequest("Failed to parse the file or it contains invalid data.");
+				return BadRequest("Error in parsing");
 			}
 
 			businessCardService.CreateBusinessCard(extractedCard);
