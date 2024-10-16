@@ -4,6 +4,7 @@
 ## Table of Contents
 
 - [Features](#features)
+- [Technology stack used](#tech)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -16,6 +17,16 @@
  - Export all business cards either to XML or CSV files.
  - ability to delete a specific card.
  - filter cards based on Address.
+
+
+## Technology stack 
+.Net web API 7.0 
+
+Angular 17.3.12
+
+Angular CLI 17.3.10
+
+
 
 ## Installation
 
@@ -54,6 +65,10 @@
    b. Update database
    
    ```dotnet ef database update```
+
+2. You can find SQL dump file in the repository.
+
+   
 
 
    
