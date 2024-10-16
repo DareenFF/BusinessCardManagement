@@ -4,6 +4,7 @@
 ## Table of Contents
 
 - [Features](#features)
+- [Technology stack used](#tech)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -16,6 +17,16 @@
  - Export all business cards either to XML or CSV files.
  - ability to delete a specific card.
  - filter cards based on Address.
+
+
+## Technology stack 
+.Net web API 7.0 
+
+Angular 17.3.12
+
+Angular CLI 17.3.10
+
+
 
 ## Installation
 
@@ -35,13 +46,13 @@
    ```dotnet build```
 6. run
    
-   ```dotnet run```
+   ```dotnet run``` (port=7205)
 
    run the client app:
 1. Navigate to client app directory ```cd ClientApp```
 2. Install node packages ```npm install```
 3. build the project ``` ng build ```
-4. run the project ```ng serve```
+4. run the project ```ng serve``` (port=4200)
 
 
 ## Database configuration :
@@ -54,6 +65,10 @@
    b. Update database
    
    ```dotnet ef database update```
+
+2. You can find SQL dump file in the repository.
+
+   
 
 
    
