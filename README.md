@@ -4,10 +4,10 @@
 ## Table of Contents
 
 - [Features](#features)
-- [Technology stack used](#tech)
+- [Technology stack used](#Technology)
 - [Installation](#installation)
+- [Database configuration](#database)
 - [Usage](#usage)
-- [Contributing](#contributing)
 
 
 ## Features
